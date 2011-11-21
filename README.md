@@ -26,3 +26,7 @@ Specifically you'll need to be able to run gerrit command line queries.
 	reviewday
 
 An output directory called 'out_report' is generated in your working directory.
+
+## Execution (Development)
+
+	PYTHONPATH=$PWD ./bin/reviewday
