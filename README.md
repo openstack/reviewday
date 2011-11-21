@@ -1,19 +1,28 @@
 # ReviewDay
 
-HTML report generator for OpenStack code reviews. Launchpad meets SmokeStack and Gerrit. Based on and inspired by 'reviewlist' by Thierry Carez.
+HTML report generator for OpenStack code reviews. Launchpad meets SmokeStack and Gerrit.
+
+Based on and inspired by 'reviewlist' by Thierry Carez.
 
 ## Description
 
-Its early in the morning and you just got an email from Soren. Oh no... Today is your review day!
+HTML report generator which creates a prioritized review list w/ function test results. The report includes:
 
-Gerrit got you down?
+* Prioritized listing of merge proposals by project
+* Direct links to gerrit code reviews
+* Direct links to test results for each branch (Unit, Libvirt, XenServer)
 
-Launchpad too slow?
+## Installation
 
-Unit tests taking too long?
+Install directly from pip (requires liblaunchpad and cheetah):
 
-Just want to see the big picture?
+	pip install reviewday
 
-What would happen if Launchpad met SmokeStack and Gerrit?
+You'll also need a working gerrit setup: http://wiki.openstack.org/GerritWorkflow
+Specifically you'll need to be able to run gerrit command line queries.
 
-REVIEWDAY!
+## Execution
+
+	reviewday
+
+An output directory called 'out_report' is generated in your working directory.
