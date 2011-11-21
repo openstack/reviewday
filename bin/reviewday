@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+from datetime import datetime
+import reviewday
+
+lp = reviewday.LaunchPad()
+smoker = reviewday.SmokeStack('http://smokestack.openstack.org/jobs.json?limit=10000')
+
+projects = {}
+
+for project in ['nova', 'glance', 'keystone']:
+    if project not in projects:
+        projects[project] = []
+    for review in reviewday.reviews(project):
+        try:
+            mp = reviewday.MergeProp(lp, smoker, review)
+            projects[project].append(mp)
+        except:
+            print 'Error creating merge prop %s' % review
+            raise
+
+dts = str(datetime.utcnow())[0:19]
+name_space = {"projects": projects, "dts": dts}
+reviewday.create_report(name_space)
