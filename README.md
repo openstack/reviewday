@@ -2,7 +2,7 @@
 
 HTML report generator for OpenStack code reviews. Launchpad meets SmokeStack and Gerrit.
 
-Based on and inspired by 'reviewlist' by Thierry Carez.
+Inspired by 'reviewlist' scripts written by Thierry Carez.
 
 ## Description
 
@@ -14,19 +14,21 @@ HTML report generator which creates a prioritized review list w/ function test r
 
 ## Installation
 
-Install directly from pip (requires launchpadlib and cheetah):
+1. Git clone the project.
+2. Install Python libraries for launchpadlib and cheetah.
+3. Setup your ssh credentials to work w/ Gerrit. See http://wiki.openstack.org/GerritWorkflow for details.
 
-	pip install reviewday
+```bash
+	$ cat ~/.ssh/config 
+	Host review
+	  Hostname review.openstack.org
+	  Port 29418
+	  User dan-prince
+```
 
-You'll also need a working gerrit setup: http://wiki.openstack.org/GerritWorkflow
-Specifically you'll need to be able to run gerrit command line queries.
 
 ## Execution
 
-	reviewday
-
-An output directory called 'out_report' is generated in your working directory.
-
-## Execution (Development)
-
 	PYTHONPATH=$PWD ./bin/reviewday
+
+An output directory called 'out_report' is generated in the current directory.
