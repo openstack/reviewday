@@ -13,4 +13,7 @@ def fail_status(job_data):
     """ Return a reference to the first job of the specified type. """
     if job_data['status'] == 'Failed':
         return '<font style="color: #FF0000;">(Fail)</font>'
-    return ''
+    elif job_data['status'] == 'Success':
+        return '<font style="color: #00AA00;">(Pass)</font>'
+    else:
+        return ''
