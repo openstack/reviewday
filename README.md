@@ -14,7 +14,7 @@ HTML report generator which creates a prioritized review list w/ function test r
 
 ## Installation
 
-Install directly from pip (requires liblaunchpad and cheetah):
+Install directly from pip (requires launchpadlib and cheetah):
 
 	pip install reviewday
 
