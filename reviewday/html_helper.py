@@ -17,3 +17,15 @@ def fail_status(job_data):
         return '<font style="color: #00AA00;">(Pass)</font>'
     else:
         return ''
+
+def review_feedback(mp):
+    return '&#13'.join(mp.feedback)
+
+def lowest_feedback(mp):
+    if mp.lowest_feedback is None:
+        return ''
+    if mp.lowest_feedback > 0:
+        color = '#00AA00'
+    else:
+        color = '#FF0000'
+    return '<font style="color: %s;">%+d</font>' % (color, mp.lowest_feedback)
