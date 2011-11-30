@@ -40,7 +40,7 @@ class MergeProp(object):
 
     def __init__(self, lp, smoker, review):
         self.owner_name = review['owner']['name']
-        self.url = review['url']
+        self.url = '%s/#change,%s' % tuple(review['url'].rsplit('/', 1))
         self.subject = review['subject']
         self.project = review['project'][10:]
         if 'topic' in review:
