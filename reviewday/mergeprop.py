@@ -54,3 +54,12 @@ class MergeProp(object):
         self.score = score
         self.cause = cause
         self.jobs = smoker.jobs(self.revision[:7])
+        self.feedback = []
+        min_value = None
+        for approval in review['currentPatchSet'].get('approvals', []):
+            name = approval['by']['name']
+            value = int(approval['value'])
+            self.feedback.append('%s: %+d' % (name, value))
+            if min_value is None or min_value > value:
+                min_value = value
+        self.lowest_feedback = min_value
