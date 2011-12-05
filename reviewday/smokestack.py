@@ -17,9 +17,14 @@ class SmokeStack(object):
             jobs_with_hash = []
             for job in self._jobs:
                 for job_type, data in job.iteritems():
-                    if data['nova_revision'] == git_hash or \
-                        data['glance_revision'] == git_hash or \
-                        data['keystone_revision'] == git_hash:
+                    if data['nova_revision'] and \
+                            data['nova_revision'][:7] == git_hash:
+                        jobs_with_hash.append(job)
+                    if data['glance_revision'] and \
+                            data['glance_revision'][:7] == git_hash:
+                        jobs_with_hash.append(job)
+                    if data['keystone_revision'] and \
+                            data['keystone_revision'][:7] == git_hash:
                         jobs_with_hash.append(job)
             return jobs_with_hash
         else:
