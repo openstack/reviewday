@@ -23,11 +23,15 @@ def fail_status(job_data, token):
 def review_feedback(mp):
     return '&#13'.join(mp.feedback)
 
-def lowest_feedback(mp):
-    if mp.lowest_feedback is None:
+def display_feedback(mp):
+    if mp.lowest_feedback is None or mp.highest_feedback is None:
         return ''
+
     if mp.lowest_feedback > 0:
+        report_value = mp.highest_feedback
         color = '#00AA00'
     else:
+        report_value = mp.lowest_feedback
         color = '#FF0000'
-    return '<font style="color: %s;">%+d</font>' % (color, mp.lowest_feedback)
+
+    return '<font style="color: %s;">%+d</font>' % (color, report_value)

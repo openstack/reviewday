@@ -16,7 +16,7 @@ class MergeProp(object):
                 if spec:
                     cause = '%s feature' % spec.priority
         except:
-            print 'WARNING: unabled to find cause for %s' % topic
+            print 'WARNING: unable to find cause for %s' % topic
             cause = 'No link'
 
         cause_score = {
@@ -55,11 +55,14 @@ class MergeProp(object):
         self.cause = cause
         self.jobs = smoker.jobs(self.revision[:7])
         self.feedback = []
-        min_value = None
+
+        self.lowest_feedback = None
+        self.highest_feedback = None
+
         for approval in review['currentPatchSet'].get('approvals', []):
             name = approval['by']['name']
             value = int(approval['value'])
             self.feedback.append('%s: %+d' % (name, value))
-            if min_value is None or min_value > value:
-                min_value = value
-        self.lowest_feedback = min_value
+
+            self.lowest_feedback = min(self.lowest_feedback, value) or value
+            self.highest_feedback = max(self.highest_feedback, value) or value
