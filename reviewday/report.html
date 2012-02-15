@@ -94,12 +94,12 @@
             <a href="http://smokestack.openstack.org/?go=/jobs/$unit_data['id']" title="$unit_data['msg']">$helper.fail_status($unit_data, 'Unit')</a>&nbsp;
             #end if
 
-            #set $libvirt_data = $helper.job_data_for_type($mp.jobs, "job_vpc")
+            #set $libvirt_data = $helper.job_data_for_type($mp.jobs, "job_chef_vpc")
             #if $libvirt_data
             <a href="http://smokestack.openstack.org/?go=/jobs/$libvirt_data['id']" title="$libvirt_data['msg']">$helper.fail_status($libvirt_data, 'Libvirt')</a>&nbsp;
             #end if
 
-            #set $xenserver_data = $helper.job_data_for_type($mp.jobs, "job_xen_hybrid")
+            #set $xenserver_data = $helper.job_data_for_type($mp.jobs, "job_chef_vpc_xen")
             #if $xenserver_data
             <a href="http://smokestack.openstack.org/?go=/jobs/$xenserver_data['id']" title="$xenserver_data['msg']">$helper.fail_status($xenserver_data, 'XenServer')</a>&nbsp;
             #end if
