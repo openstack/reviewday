@@ -26,6 +26,9 @@ class SmokeStack(object):
                     if data['keystone_revision'] and \
                             data['keystone_revision'][:7] == git_hash:
                         jobs_with_hash.append(job)
+                    if data['swift_revision'] and \
+                            data['swift_revision'][:7] == git_hash:
+                        jobs_with_hash.append(job)
             return jobs_with_hash
         else:
             return self._jobs

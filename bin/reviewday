@@ -8,7 +8,7 @@ smoker = reviewday.SmokeStack('http://smokestack.openstack.org/jobs.json?limit=1
 
 projects = {}
 
-for project in ['nova', 'glance', 'keystone']:
+for project in ['nova', 'glance', 'keystone', 'swift']:
     if project not in projects:
         projects[project] = []
     for review in reviewday.reviews(project):
