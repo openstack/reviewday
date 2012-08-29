@@ -1,3 +1,4 @@
+  -Update to support most recent SmokeStack job types.
   -Replace gerrit urls to short circuit redirects
   -Show review feedback from gerrit
   -Coloring test result links.
