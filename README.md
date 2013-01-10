@@ -32,3 +32,7 @@ HTML report generator which creates a prioritized review list w/ function test r
 	PYTHONPATH=$PWD ./bin/reviewday
 
 An output directory called 'out_report' is generated in the current directory.
+
+## License
+
+See LICENSE.txt for further details.
