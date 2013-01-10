@@ -18,7 +18,7 @@ def fail_status(job_data, token):
         color = '00AA00'
     else:
         color = '000000'
-    return output % locals()
+    return output % color
 
 
 def review_feedback(mp):
