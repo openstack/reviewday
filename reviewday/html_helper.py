@@ -11,14 +11,14 @@ def job_data_for_type(jobs, job_type):
 
 def fail_status(job_data, token):
     """ Return a reference to the first job of the specified type. """
-    output = '<font style="color: #%(color)s;">%(token)s</font>'
+    output = '<font style="color: #%s;">%s</font>'
     if job_data['status'] == 'Failed':
         color = 'FF0000'
     elif job_data['status'] == 'Success':
         color = '00AA00'
     else:
         color = '000000'
-    return output % color
+    return output % (color, token)
 
 
 def review_feedback(mp):
