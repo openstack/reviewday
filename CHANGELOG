@@ -1,8 +1,10 @@
+* Thu Jan 10 2013 Dan Prince <dprince@redhat.com> - 0.2.0
   -Update to support most recent SmokeStack job types.
-  -Replace gerrit urls to short circuit redirects
-  -Show review feedback from gerrit
-  -Coloring test result links.
+  -Replace gerrit urls to short circuit redirects (markwash)
+  -Show review feedback from gerrit (markwash)
+  -Coloring test result links. (bcwaldon)
   -Truncate revisions for job git hashes. (fixes job lookup by short git hash)
+  -Add swift, quantum, and cinder to the projects list.
 
 * Mon Nov 21 2011 Dan Prince <dan.prince@rackspace.com> - 0.1.0
   -Initial release.
