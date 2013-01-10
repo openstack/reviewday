@@ -7,7 +7,7 @@ def read(fname):
 
 setup(
     name = "reviewday",
-    version = "0.1.0",
+    version = "0.2.0",
     author = "Dan Prince",
     author_email = "dan.prince@rackspace.com",
     description = ("Report generator for OpenStack code reviews."),
