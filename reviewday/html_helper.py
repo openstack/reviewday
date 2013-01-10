@@ -20,8 +20,10 @@ def fail_status(job_data, token):
         color = '000000'
     return output % locals()
 
+
 def review_feedback(mp):
     return '&#13'.join(mp.feedback)
+
 
 def display_feedback(mp):
     if mp.lowest_feedback is None or mp.highest_feedback is None:
