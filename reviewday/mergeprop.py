@@ -20,21 +20,21 @@ class MergeProp(object):
             cause = 'No link'
 
         cause_score = {
-                      'Regression hotfix': 350,
-                      'Critical bugfix': 340,
-                      'Essential feature': 330,
-                      'High feature': 230,
-                      'Medium feature': 180,
-                      'High bugfix': 130,
-                      'Low feature': 100,
-                      'Medium bugfix': 70,
-                      'Low bugfix': 50,
-                      'Undefined feature': 40,
-                      'Wishlist bugfix': 35,
-                      'Undecided bugfix': 30,
-                      'Untargeted feature': 10,
-                      'No link': 0,
-                      }
+            'Regression hotfix': 350,
+            'Critical bugfix': 340,
+            'Essential feature': 330,
+            'High feature': 230,
+            'Medium feature': 180,
+            'High bugfix': 130,
+            'Low feature': 100,
+            'Medium bugfix': 70,
+            'Low bugfix': 50,
+            'Undefined feature': 40,
+            'Wishlist bugfix': 35,
+            'Undecided bugfix': 30,
+            'Untargeted feature': 10,
+            'No link': 0,
+        }
 
         return (cause, cause_score[cause])
 
