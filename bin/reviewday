@@ -6,6 +6,15 @@ from reviewday.util import create_report
 from reviewday.launchpad import LaunchPad
 from reviewday.mergeprop import MergeProp
 from reviewday.smokestack import SmokeStack
+from optparse import OptionParser
+
+optparser = OptionParser()
+
+optparser.add_option('-o', '--out-dir', dest='out_dir',
+                     help='set output directory [default = %default]',
+                     default='out_report', type='string')
+
+(options, args) = optparser.parse_args()
 
 lp = LaunchPad()
 smoker = SmokeStack('http://smokestack.openstack.org/jobs.json?limit=10000')
@@ -25,4 +34,5 @@ for project in ['nova', 'glance', 'keystone', 'swift', 'quantum', 'cinder']:
 
 dts = str(datetime.utcnow())[0:19]
 name_space = {"projects": projects, "dts": dts}
-create_report(name_space)
+out_dir = options.out_dir
+create_report(out_dir, name_space)
