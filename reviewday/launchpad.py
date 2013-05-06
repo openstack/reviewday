@@ -6,7 +6,7 @@ class LaunchPad(object):
     def __init__(self):
         self.lp = Launchpad.login_anonymously('reviewday', 'production',
                                               '~/.launchpadlib-reviewday',
-                                              version="devel")
+                                              version="devel", timeout=5)
         self.spec_cache = {}
 
     def bug(self, id):
