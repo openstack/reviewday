@@ -36,6 +36,9 @@ class MergeProp(object):
             'No link': 0,
         }
 
+        if cause not in cause_score:
+            print 'WARNING: unable to find score for (%s, %s)' % (topic, cause)
+            return ("Unknown cause: " + cause, 0)
         return (cause, cause_score[cause])
 
     def __init__(self, lp, smoker, review):
