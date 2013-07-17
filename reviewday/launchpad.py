@@ -18,11 +18,16 @@ class LaunchPad(object):
     def specifications(self, project):
         if project not in self.spec_cache:
             specs = self.project(project).valid_specifications
-            self.spec_cache[project] = specs
+            cache = {}
+            for spec in specs:
+                spec_str = str(spec)
+                spec_name = spec_str[spec_str.index('+spec/') + 6:]
+                cache[spec_name] = spec
+            self.spec_cache[project] = cache
         return self.spec_cache[project]
 
     def specification(self, project, spec_name):
         specs = self.specifications(project)
-        for spec in specs:
-            if spec.name == spec_name:
+        for name, spec in specs.iteritems():
+            if name == spec_name:
                 return spec
