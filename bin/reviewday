@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from datetime import datetime
+from time import time
 from reviewday.gerrit import reviews as gerrit_reviews
 from reviewday.util import create_report
 from reviewday.launchpad import LaunchPad
@@ -21,13 +22,14 @@ smoker = SmokeStack('https://smokestack.openstack.org/jobs.json?limit=10000')
 
 projects = {}
 
-for project in ['nova', 'glance', 'keystone', 'swift', 'neutron', 'cinder',
+cur_timestamp = time()
+for project in ['nova', 'glance', 'keystone', 'swift', 'quantum', 'cinder',
                 'tempest', 'heat', 'ceilometer']:
     if project not in projects:
         projects[project] = []
     for review in gerrit_reviews(project):
         try:
-            mp = MergeProp(lp, smoker, review)
+            mp = MergeProp(lp, smoker, review, cur_timestamp)
             projects[project].append(mp)
         except:
             print 'Error creating merge prop %s' % review

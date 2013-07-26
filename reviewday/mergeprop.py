@@ -1,22 +1,22 @@
 class MergeProp(object):
 
-    def _calc_score(self, lp, project, topic):
+    def _calc_score(self, lp, cur_timestamp):
         cause = 'No link'
         try:
-            if topic.find('bug/') == 0:
-                bug = lp.bug(topic[4:])
+            if self.topic.find('bug/') == 0:
+                bug = lp.bug(self.topic[4:])
                 #FIXME: bug.importance doesn't seem to work but it should?
                 cause = '%s bugfix' % bug.bug_tasks[0].importance
-            elif topic.find('bp/') == 0:
-                spec = lp.specification(project, topic[3:])
+            elif self.topic.find('bp/') == 0:
+                spec = lp.specification(self.project, self.topic[3:])
                 if spec:
                     cause = '%s feature' % spec.priority
             else:
-                spec = lp.specification(project, topic)
+                spec = lp.specification(self.project, self.topic)
                 if spec:
                     cause = '%s feature' % spec.priority
         except:
-            print 'WARNING: unable to find cause for %s' % topic
+            print 'WARNING: unable to find cause for %s' % self.topic
             cause = 'No link'
 
         cause_score = {
@@ -37,11 +37,22 @@ class MergeProp(object):
         }
 
         if cause not in cause_score:
-            print 'WARNING: unable to find score for (%s, %s)' % (topic, cause)
-            return ("Unknown cause: " + cause, 0)
-        return (cause, cause_score[cause])
+            print 'WARNING: unable to find score for ' \
+                  '(%s, %s)' % (self.topic, cause)
+            return ("No link", "Unknown cause: " + cause, 0)
+        score = cause_score[cause]
+        reason = [cause + " (+%d)" % (score)]
+        # Add a score based on the time the patch has been waiting for approval
+        days_old = int((cur_timestamp - self.revisionCreatedOn) / 86400)
+        if ((days_old > 0) and (self.lowest_feedback != -2)):
+            # A medium bugfix will have to be around for 10 days before it is
+            # ranked higher than a low feature.
+            days_old_score = 3 * days_old
+            reason.append("%d days old (+%d)" % (days_old, days_old_score))
+            score = score + days_old_score
+        return (cause, reason, score)
 
-    def __init__(self, lp, smoker, review):
+    def __init__(self, lp, smoker, review, cur_timestamp):
         self.owner_name = review['owner']['name']
         self.url = '%s/#change,%s' % tuple(review['url'].rsplit('/', 1))
         self.subject = review['subject']
@@ -52,10 +63,8 @@ class MergeProp(object):
             self.topic = ''
         self.revision = review['currentPatchSet']['revision']
         self.refspec = review['currentPatchSet']['ref']
+        self.revisionCreatedOn = review['currentPatchSet']['createdOn']
         self.number = review['number']
-        cause, score = self._calc_score(lp, self.project, self.topic)
-        self.score = score
-        self.cause = cause
         self.jobs = smoker.jobs(self.revision[:7])
         self.feedback = []
 
@@ -69,3 +78,9 @@ class MergeProp(object):
 
             self.lowest_feedback = min(self.lowest_feedback, value) or value
             self.highest_feedback = max(self.highest_feedback, value) or value
+
+        # Make use of the feedback in calculating the score
+        cause, reason, score = self._calc_score(lp, cur_timestamp)
+        self.score = score
+        self.reason = reason
+        self.cause = cause

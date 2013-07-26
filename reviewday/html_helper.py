@@ -22,7 +22,11 @@ def fail_status(job_data, token):
 
 
 def review_feedback(mp):
-    return '&#13'.join(mp.feedback)
+    return '&#13;'.join(mp.feedback)
+
+
+def review_score(mp):
+    return '&#13;'.join(mp.reason)
 
 
 def display_feedback(mp):
