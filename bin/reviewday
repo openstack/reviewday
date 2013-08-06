@@ -21,7 +21,7 @@ smoker = SmokeStack('http://smokestack.openstack.org/jobs.json?limit=10000')
 
 projects = {}
 
-for project in ['nova', 'glance', 'keystone', 'swift', 'quantum', 'cinder',
+for project in ['nova', 'glance', 'keystone', 'swift', 'neutron', 'cinder',
                 'tempest', 'heat', 'ceilometer']:
     if project not in projects:
         projects[project] = []

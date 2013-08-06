@@ -32,8 +32,8 @@ class SmokeStack(object):
                     if data['cinder_revision'] and \
                             data['cinder_revision'][:7] == git_hash:
                         jobs_with_hash.append(job)
-                    if data['quantum_revision'] and \
-                            data['quantum_revision'][:7] == git_hash:
+                    if data['neutron_revision'] and \
+                            data['neutron_revision'][:7] == git_hash:
                         jobs_with_hash.append(job)
             return jobs_with_hash
         else:
