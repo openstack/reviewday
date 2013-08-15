@@ -10,7 +10,7 @@ class SmokeStack(object):
 
     def jobs(self, git_hash=None):
         if not self._jobs:
-            h = httplib2.Http()
+            h = httplib2.Http(disable_ssl_certificate_validation=True)
             resp, content = h.request(self.url, "GET")
             self._jobs = json.loads(content)
         if git_hash:

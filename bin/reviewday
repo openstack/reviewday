@@ -17,7 +17,7 @@ optparser.add_option('-o', '--out-dir', dest='out_dir',
 (options, args) = optparser.parse_args()
 
 lp = LaunchPad()
-smoker = SmokeStack('http://smokestack.openstack.org/jobs.json?limit=10000')
+smoker = SmokeStack('https://smokestack.openstack.org/jobs.json?limit=10000')
 
 projects = {}
 
