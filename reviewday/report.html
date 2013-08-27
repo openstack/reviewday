@@ -103,17 +103,17 @@
 
             #set $unit_data = $helper.job_data_for_type($mp.jobs, "job_unit_tester")
             #if $unit_data
-            <a href="http://smokestack.openstack.org/?go=/jobs/$unit_data['id']" title="$unit_data['msg']">$helper.fail_status($unit_data, 'Unit')</a>&nbsp;
+            <a href="https://smokestack.openstack.org/?go=/jobs/$unit_data['id']" title="$unit_data['msg']">$helper.fail_status($unit_data, 'Unit')</a>&nbsp;
             #end if
 
             #set $libvirt_data = $helper.job_data_for_type($mp.jobs, "job_puppet_libvirt")
             #if $libvirt_data
-            <a href="http://smokestack.openstack.org/?go=/jobs/$libvirt_data['id']" title="$libvirt_data['msg']">$helper.fail_status($libvirt_data, 'Libvirt')</a>&nbsp;
+            <a href="https://smokestack.openstack.org/?go=/jobs/$libvirt_data['id']" title="$libvirt_data['msg']">$helper.fail_status($libvirt_data, 'Libvirt')</a>&nbsp;
             #end if
 
             #set $xenserver_data = $helper.job_data_for_type($mp.jobs, "job_puppet_xen")
             #if $xenserver_data
-            <a href="http://smokestack.openstack.org/?go=/jobs/$xenserver_data['id']" title="$xenserver_data['msg']">$helper.fail_status($xenserver_data, 'XenServer')</a>&nbsp;
+            <a href="https://smokestack.openstack.org/?go=/jobs/$xenserver_data['id']" title="$xenserver_data['msg']">$helper.fail_status($xenserver_data, 'XenServer')</a>&nbsp;
             #end if
 
           </td>
