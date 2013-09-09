@@ -6,12 +6,14 @@ class SmokeStack(object):
 
     def __init__(self, url):
         self._jobs = None
+        self._config_templates = None
         self.url = url
 
     def jobs(self, git_hash=None):
         if not self._jobs:
             h = httplib2.Http(disable_ssl_certificate_validation=True)
-            resp, content = h.request(self.url, "GET")
+            jobs_url = self.url + '/jobs.json?limit=10000'
+            resp, content = h.request(jobs_url, "GET")
             self._jobs = json.loads(content)
         if git_hash:
             jobs_with_hash = []
@@ -38,3 +40,13 @@ class SmokeStack(object):
             return jobs_with_hash
         else:
             return self._jobs
+
+    def config_templates(self):
+        if not self._config_templates:
+            h = httplib2.Http(disable_ssl_certificate_validation=True)
+            ct_url = self.url + '/config_templates.json'
+            resp, content = h.request(ct_url, "GET")
+            self._config_templates = {}
+            for ct in json.loads(content):
+                self._config_templates[ct['id']] = ct['name']
+        return self._config_templates

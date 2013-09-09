@@ -101,15 +101,10 @@
           </td>
           <td>
 
-            #set $unit_data = $helper.job_data_for_type($mp.jobs, "job_unit_tester")
-            #if $unit_data
-            <a href="https://smokestack.openstack.org/?go=/jobs/$unit_data['id']" title="$unit_data['msg']">$helper.fail_status($unit_data, 'Unit')</a>&nbsp;
-            #end if
-
-            #set $libvirt_data = $helper.job_data_for_type($mp.jobs, "job_puppet_libvirt")
-            #if $libvirt_data
-            <a href="https://smokestack.openstack.org/?go=/jobs/$libvirt_data['id']" title="$libvirt_data['msg']">$helper.fail_status($libvirt_data, 'Libvirt')</a>&nbsp;
-            #end if
+            #for $cloudcue_data in $helper.all_job_data($mp.jobs, "job_puppet_cloudcue")
+              #set $config_template_name = $helper.config_template_name($cloudcue_data['config_template_id'], $config_templates)
+              <a href="https://smokestack.openstack.org/?go=/jobs/$cloudcue_data['id']" title="$cloudcue_data['msg']">$helper.fail_status($cloudcue_data, $config_template_name)</a>&nbsp;
+            #end for
 
             #set $xenserver_data = $helper.job_data_for_type($mp.jobs, "job_puppet_xen")
             #if $xenserver_data
@@ -120,7 +115,6 @@
         </tr>
 
 #end for
-
 
     </tbody>
    </table>

@@ -17,7 +17,7 @@ optparser.add_option('-o', '--out-dir', dest='out_dir',
 (options, args) = optparser.parse_args()
 
 lp = LaunchPad()
-smoker = SmokeStack('https://smokestack.openstack.org/jobs.json?limit=10000')
+smoker = SmokeStack('https://smokestack.openstack.org')
 
 projects = {}
 
@@ -34,6 +34,8 @@ for project in ['nova', 'glance', 'keystone', 'swift', 'neutron', 'cinder',
             raise
 
 dts = str(datetime.utcnow())[0:19]
-name_space = {"projects": projects, "dts": dts}
+config_templates = smoker.config_templates()
+name_space = {"projects": projects, "dts": dts,
+              "config_templates": config_templates}
 out_dir = options.out_dir
 create_report(out_dir, name_space)
