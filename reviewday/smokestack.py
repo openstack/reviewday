@@ -12,7 +12,7 @@ class SmokeStack(object):
     def jobs(self, git_hash=None):
         if not self._jobs:
             h = httplib2.Http(disable_ssl_certificate_validation=True)
-            jobs_url = self.url + '/jobs.json?limit=10000'
+            jobs_url = self.url + '/jobs.json?limit=99999'
             resp, content = h.request(jobs_url, "GET")
             self._jobs = json.loads(content)
         if git_hash:
@@ -36,6 +36,12 @@ class SmokeStack(object):
                         jobs_with_hash.append(job)
                     if data['neutron_revision'] and \
                             data['neutron_revision'][:7] == git_hash:
+                        jobs_with_hash.append(job)
+                    if data['ceilometer_revision'] and \
+                            data['ceilometer_revision'][:7] == git_hash:
+                        jobs_with_hash.append(job)
+                    if data['heat_revision'] and \
+                            data['heat_revision'][:7] == git_hash:
                         jobs_with_hash.append(job)
             return jobs_with_hash
         else:
