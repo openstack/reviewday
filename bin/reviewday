@@ -23,7 +23,7 @@ smoker = SmokeStack('https://smokestack.openstack.org')
 projects = {}
 
 cur_timestamp = time()
-for project in ['nova', 'glance', 'keystone', 'swift', 'quantum', 'cinder',
+for project in ['nova', 'glance', 'keystone', 'swift', 'neutron', 'cinder',
                 'tempest', 'heat', 'ceilometer']:
     if project not in projects:
         projects[project] = []
