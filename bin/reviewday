@@ -24,7 +24,7 @@ projects = {}
 
 cur_timestamp = time()
 for project in ['nova', 'glance', 'keystone', 'swift', 'neutron', 'cinder',
-                'tempest', 'heat', 'ceilometer']:
+                'tempest', 'heat', 'ceilometer', 'horizon']:
     if project not in projects:
         projects[project] = []
     for review in gerrit_reviews(project):
