@@ -1,6 +1,10 @@
 # Helper functions to help generate the HTML report
 
 
+def sort(list):
+    return sorted(list)
+
+
 def config_template_name(config_template_id, config_templates):
     if config_template_id in config_templates:
         return config_templates[config_template_id]

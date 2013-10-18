@@ -27,7 +27,8 @@
 </div>
 <div class="yui-d0">
 
-#for $project, $mergeprops in $projects.iteritems():
+#for $project in $helper.sort($projects.keys()):
+    #set $mergeprops = $projects[$project]
 
     <a name="$project"></a>
     <div class="flowed-block wide">
