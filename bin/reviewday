@@ -34,6 +34,7 @@ for project in ['nova', 'python-novaclient', 'glance', 'python-glanceclient',
                 'os-refresh-config', 'python-tuskarclient',
                 'tripleo-heat-templates', 'tripleo-image-elements',
                 'tripleo-incubator', 'tuskar', 'tuskar-ui',
+                'ironic', 'python-ironicclient',
                 ]:
     if project not in projects:
         projects[project] = []
