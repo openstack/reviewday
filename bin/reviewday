@@ -32,6 +32,7 @@ PROJECTS = [
     'glance',
     'heat',
     'horizon',
+    'identity-api',
     'ironic',
     'keystone',
     'neutron',
