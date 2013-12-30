@@ -24,18 +24,41 @@ smoker = SmokeStack('https://smokestack.openstack.org')
 projects = {}
 
 cur_timestamp = time()
-for project in ['nova', 'python-novaclient', 'glance', 'python-glanceclient',
-                'keystone', 'python-keystoneclient', 'swift',
-                'python-swiftclient', 'neutron', 'python-neutronclient',
-                'cinder', 'python-cinderclient', 'heat', 'python-heatclient',
-                'ceilometer', 'python-ceilometerclient',
-                'tempest', 'horizon',
-                'diskimage-builder', 'os-apply-config', 'os-collect-config',
-                'os-refresh-config', 'python-tuskarclient',
-                'tripleo-heat-templates', 'tripleo-image-elements',
-                'tripleo-incubator', 'tuskar', 'tuskar-ui',
-                'ironic', 'python-ironicclient',
-                ]:
+
+PROJECTS = [
+    'ceilometer',
+    'cinder',
+    'diskimage-builder',
+    'glance',
+    'heat',
+    'horizon',
+    'ironic',
+    'keystone',
+    'neutron',
+    'nova',
+    'os-apply-config',
+    'os-collect-config',
+    'os-refresh-config',
+    'python-ceilometerclient',
+    'python-cinderclient',
+    'python-glanceclient',
+    'python-heatclient',
+    'python-ironicclient',
+    'python-keystoneclient',
+    'python-neutronclient',
+    'python-novaclient',
+    'python-swiftclient',
+    'python-tuskarclient',
+    'swift',
+    'tempest',
+    'tripleo-heat-templates',
+    'tripleo-image-elements',
+    'tripleo-incubator',
+    'tuskar',
+    'tuskar-ui',
+    ]
+
+for project in PROJECTS:
     if project not in projects:
         projects[project] = []
     for review in gerrit_reviews(project):
