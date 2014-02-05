@@ -64,6 +64,7 @@ class MergeProp(object):
         self.revision = review['currentPatchSet']['revision']
         self.refspec = review['currentPatchSet']['ref']
         self.revisionCreatedOn = review['currentPatchSet']['createdOn']
+        self.status = review['status']
         self.number = review['number']
         self.jobs = smoker.jobs(self.revision[:7])
         self.feedback = []
@@ -81,6 +82,11 @@ class MergeProp(object):
 
         # Make use of the feedback in calculating the score
         cause, reason, score = self._calc_score(lp, cur_timestamp)
+        if self.status == 'WORKINPROGRESS':
+            # if the review status is WIP, always make it a score of 0 and
+            # adjust the subject to indicate it's a WIP
+            score = 0
+            self.subject = '(WIP): %s' % self.subject
         self.score = score
         self.reason = reason
         self.cause = cause
