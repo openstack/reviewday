@@ -1,6 +1,5 @@
 import json
 import os
-import tempfile
 import html_helper
 from Cheetah.Template import Template
 from distutils.dir_util import copy_tree
@@ -32,7 +31,7 @@ def _create_json(out_dir, name_space={}):
                 'feedback': {'lowest': mp.lowest_feedback,
                              'highest': mp.highest_feedback, }, }
 
-    with tempfile.NamedTemporaryFile(dir=out_dir, delete=False) as f:
+    with open(os.path.join(out_dir, 'reviewday.json.tmp'), "w") as f:
         json.dump(data, f, indent=2)
     os.rename(f.name, os.path.join(out_dir, 'reviewday.json'))
 
