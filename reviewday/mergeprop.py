@@ -87,6 +87,8 @@ class MergeProp(object):
             # adjust the subject to indicate it's a WIP
             score = 0
             self.subject = '(WIP): %s' % self.subject
+        else:
+            score += 1
         self.score = score
         self.reason = reason
         self.cause = cause
