@@ -44,8 +44,8 @@ def create_report(out_dir, name_space={}):
 
     prep_out_dir(out_dir)
 
-    out_file = open(os.path.join(out_dir, 'index.html'), "w")
-    out_file.write(str(t))
-    out_file.close()
+    with open(os.path.join(out_dir, 'index.html.tmp'), "w") as f:
+        f.write(str(t))
+    os.rename(f.name, os.path.join(out_dir, 'index.html'))
 
     _create_json(out_dir, name_space=name_space)
