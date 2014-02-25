@@ -59,6 +59,11 @@ table.listing img {
 	content:"";
 }
 
+.container h1 {
+    font-size: 200%;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
 .yui-d0 {
     width: 950px;
     margin: 0 auto;
