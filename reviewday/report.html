@@ -64,11 +64,6 @@
           <th><a href="#" class="sortheader" title="Feedback"
             onclick="ts_resortTable(this); return false;">F<img
             class="sortarrow" src="arrowBlank" height="6" width="9"/></a></th>
-
-          <th><a href="#" class="sortheader"
-            onclick="ts_resortTable(this); return false;">SmokeStack Test Results<img
-            class="sortarrow" src="arrowBlank" height="6" width="9"/></a></th>
-
         </tr>
       </thead>
       <tbody>
@@ -99,19 +94,6 @@
           </td>
           <td>
             <a title="$helper.review_feedback($mp)">$helper.display_feedback($mp)</a>
-          </td>
-          <td>
-
-            #for $cloudcue_data in $helper.all_job_data($mp.jobs, "job_puppet_cloudcue")
-              #set $config_template_name = $helper.config_template_name($cloudcue_data['config_template_id'], $config_templates)
-              <a href="https://smokestack.openstack.org/?go=/jobs/$cloudcue_data['id']" title="$cloudcue_data['msg']">$helper.fail_status($cloudcue_data, $config_template_name)</a>&nbsp;
-            #end for
-
-            #set $xenserver_data = $helper.job_data_for_type($mp.jobs, "job_puppet_xen")
-            #if $xenserver_data
-            <a href="https://smokestack.openstack.org/?go=/jobs/$xenserver_data['id']" title="$xenserver_data['msg']">$helper.fail_status($xenserver_data, 'XenServer')</a>&nbsp;
-            #end if
-
           </td>
         </tr>
 

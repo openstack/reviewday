@@ -52,7 +52,7 @@ class MergeProp(object):
             score = score + days_old_score
         return (cause, reason, score)
 
-    def __init__(self, lp, smoker, review, cur_timestamp):
+    def __init__(self, lp, review, cur_timestamp):
         self.owner_name = review['owner']['name']
         self.url = '%s/#change,%s' % tuple(review['url'].rsplit('/', 1))
         self.subject = review['subject']
@@ -66,7 +66,6 @@ class MergeProp(object):
         self.revisionCreatedOn = review['currentPatchSet']['createdOn']
         self.status = review['status']
         self.number = review['number']
-        self.jobs = smoker.jobs(self.revision[:7])
         self.feedback = []
 
         self.lowest_feedback = None

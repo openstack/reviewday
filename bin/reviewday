@@ -7,7 +7,6 @@ from reviewday.gerrit import reviews as gerrit_reviews
 from reviewday.util import create_report
 from reviewday.launchpad import LaunchPad
 from reviewday.mergeprop import MergeProp
-from reviewday.smokestack import SmokeStack
 from optparse import OptionParser
 
 optparser = OptionParser()
@@ -19,7 +18,6 @@ optparser.add_option('-o', '--out-dir', dest='out_dir',
 (options, args) = optparser.parse_args()
 
 lp = LaunchPad()
-smoker = SmokeStack('https://smokestack.openstack.org')
 
 projects = {}
 
@@ -64,15 +62,13 @@ for project in PROJECTS:
         projects[project] = []
     for review in gerrit_reviews(project):
         try:
-            mp = MergeProp(lp, smoker, review, cur_timestamp)
+            mp = MergeProp(lp, review, cur_timestamp)
             projects[project].append(mp)
         except:
             print 'Error creating merge prop %s' % review
             raise
 
 dts = str(datetime.utcnow())[0:19]
-config_templates = smoker.config_templates()
-name_space = {"projects": projects, "dts": dts,
-              "config_templates": config_templates}
+name_space = {"projects": projects, "dts": dts}
 out_dir = options.out_dir
 create_report(out_dir, name_space)

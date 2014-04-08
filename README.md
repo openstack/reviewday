@@ -1,6 +1,6 @@
 # ReviewDay
 
-HTML report generator for OpenStack code reviews. Launchpad meets SmokeStack and Gerrit.
+HTML report generator for OpenStack code reviews. Launchpad meets Gerrit.
 
 Inspired by 'reviewlist' scripts written by Thierry Carez.
 
