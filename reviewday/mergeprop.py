@@ -67,6 +67,7 @@ class MergeProp(object):
         self.status = review['status']
         self.number = review['number']
         self.feedback = []
+        self.is_wip = False
 
         self.lowest_feedback = None
         self.highest_feedback = None
@@ -79,15 +80,11 @@ class MergeProp(object):
             self.lowest_feedback = min(self.lowest_feedback, value) or value
             self.highest_feedback = max(self.highest_feedback, value) or value
 
+            if approval['type'] == 'Workflow' and value == -1:
+                self.is_wip = True
+
         # Make use of the feedback in calculating the score
         cause, reason, score = self._calc_score(lp, cur_timestamp)
-        if self.status == 'WORKINPROGRESS':
-            # if the review status is WIP, always make it a score of 0 and
-            # adjust the subject to indicate it's a WIP
-            score = 0
-            self.subject = '(WIP): %s' % self.subject
-        else:
-            score += 1
         self.score = score
         self.reason = reason
         self.cause = cause

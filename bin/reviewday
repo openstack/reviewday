@@ -71,7 +71,8 @@ for project in PROJECTS:
     for review in gerrit_reviews(project):
         try:
             mp = MergeProp(lp, review, cur_timestamp)
-            projects[project].append(mp)
+            if not mp.is_wip:
+                projects[project].append(mp)
         except:
             print 'Error creating merge prop %s' % review
 
