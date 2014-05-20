@@ -1,0 +1,3 @@
+include README.md
+include reviewday/report.html
+recursive-include reviewday/report_files *
