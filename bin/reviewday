@@ -74,7 +74,6 @@ for project in PROJECTS:
             projects[project].append(mp)
         except:
             print 'Error creating merge prop %s' % review
-            raise
 
 dts = str(datetime.utcnow())[0:19]
 name_space = {"projects": projects, "dts": dts}
