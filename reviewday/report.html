@@ -1,51 +1,70 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf8" http-equiv="Content-Type"/>
   <base href="."/>
-  <title>OpenStack branch reviews</title>
-  <script type="text/javascript" src="http://status.openstack.org/common.js"></script>
+  <title>
+   OpenStack branch reviews
+  </title>
+  <script src="http://status.openstack.org/common.js" type="text/javascript">
+  </script>
   <!-- Framework CSS -->
-  <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print">
+  <link href="http://openstack.org/themes/openstack/css/blueprint/screen.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+  <link href="http://openstack.org/themes/openstack/css/blueprint/print.css" media="print" rel="stylesheet" type="text/css"/>
   <!-- IE CSS -->
   <!--[if lt IE 8]><link rel="stylesheet" href="http://openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
   <!-- OpenStack Specific CSS -->
-  <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print">
+  <link href="http://openstack.org/themes/openstack/css/dropdown.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
   <!-- Page Specific CSS -->
-  <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print">
-  <link rel="stylesheet" type="text/css" href="http://openstack.org/themes/openstack/css/main.css">
-  <link type="text/css" rel="stylesheet" media="screen,print" href="combo.css"/>
-  <script type="text/javascript" src="sorting.js"></script>
-</head>
-
-<body id="document" class="tab-specifications">
-<script type="text/javascript">header('Reviews');</script>
-<div class="container">
-    <h1>ReviewDay</h1>
-    <p><a href="/reviews/reviewday.json">Reviewday JSON file</a></p>
-</div>
-<div class="yui-d0">
-
-#for $project in $helper.sort($projects.keys()):
+  <link href="http://openstack.org/themes/openstack/css/home.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+  <link href="http://openstack.org/themes/openstack/css/main.css" rel="stylesheet" type="text/css"/>
+  <link href="combo.css" media="screen,print" rel="stylesheet" type="text/css"/>
+  <script src="sorting.js" type="text/javascript">
+  </script>
+ </head>
+ <body class="tab-specifications" id="document">
+  <script type="text/javascript">
+   header('Reviews');
+  </script>
+  <div class="container">
+   <h1>
+    ReviewDay
+   </h1>
+   <p>
+    <a href="/reviews/reviewday.json">
+     Reviewday JSON file
+    </a>
+   </p>
+  </div>
+  <div class="yui-d0">
+   #for $project in $helper.sort($projects.keys()):
     #set $mergeprops = $projects[$project]
-
-    <a name="$project"></a>
-    <div class="flowed-block wide">
-      <h1>$project branch reviews</h1>
-      <ol class="breadcrumbs">
-        <li>Page refreshed at $dts UTC</li>
-        <li>$len($mergeprops) active reviews</li>
-      </ol><br/>
-    </div>
-    <table class="listing sortable" summary="$project reviews">
-      <thead>
-        <tr>
-          <th><a href="#" class="sortheader"
-            onclick="ts_resortTable(this); return false;">Type / Subject<img
-            class="sortarrow" src="arrowBlank" height="6" width="9"/></a></th>
-<!--
+   <a name="$project">
+   </a>
+   <div class="flowed-block wide">
+    <h1>
+     $project branch reviews
+    </h1>
+    <ol class="breadcrumbs">
+     <li>
+      Page refreshed at $dts UTC
+     </li>
+     <li>
+      $len($mergeprops) active reviews
+     </li>
+    </ol>
+    <br/>
+   </div>
+   <table class="listing sortable" summary="$project reviews">
+    <thead>
+     <tr>
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
+        Type / Subject
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <!--
           <th><a href="#" class="sortheader"
             onclick="ts_resortTable(this); return false;">Patchsize<img
             class="sortarrow" src="arrowBlank" height="6" width="9"></a></th>
@@ -53,30 +72,39 @@
             onclick="ts_resortTable(this); return false;">Age<img
             class="sortarrow" src="arrowBlank" height="6" width="9"></a></th>
 -->
-          <th><a href="#" class="sortheader"
-            onclick="ts_resortTable(this); return false;">Registrant<img
-            class="sortarrow" src="arrowBlank" height="6" width="9"/></a></th>
-
-          <th><a href="#" class="sortheader" id="$project-sortscore"
-            title="Score" onclick="ts_resortTable(this); return false;">S<img
-            class="sortarrow" src="arrowBlank" height="6" width="9"/></a></th>
-
-          <th><a href="#" class="sortheader" title="Feedback"
-            onclick="ts_resortTable(this); return false;">F<img
-            class="sortarrow" src="arrowBlank" height="6" width="9"/></a></th>
-        </tr>
-      </thead>
-      <tbody>
-
-#for $mp in $mergeprops
-
-        <tr>
-          <td>
-            <span class="sortkey">12</span>
-            <img src="${mp.cause.replace(' ', '').upper()}.png" title="$mp.cause"/>
-            <a href="$mp.url" title="$mp.subject">$mp.subject[:60]</a>
-          </td>
-<!--
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
+        Registrant
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <th>
+       <a class="sortheader" href="#" id="$project-sortscore" onclick="ts_resortTable(this); return false;" title="Score">
+        S
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;" title="Feedback">
+        F
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     #for $mp in $mergeprops
+     <tr>
+      <td>
+       <span class="sortkey">
+        12
+       </span>
+       <img src="${mp.cause.replace(' ', '').upper()}.png" title="$mp.cause"/>
+       <a href="$mp.url" title="$mp.subject">
+        $mp.subject[:60]
+       </a>
+      </td>
+      <!--
           <td>
             <span class="sortkey">3176</span>
             3176 lines
@@ -86,27 +114,31 @@
             60 days
           </td>
 -->
-          <td>
-            $mp.owner_name
-          </td>
-          <td>
-            <a title="$helper.review_score($mp)">$mp.score</a>
-          </td>
-          <td>
-            <a title="$helper.review_feedback($mp)">$helper.display_feedback($mp)</a>
-          </td>
-        </tr>
-
-#end for
-
+      <td>
+       $mp.owner_name
+      </td>
+      <td>
+       <a title="$helper.review_score($mp)">
+        $mp.score
+       </a>
+      </td>
+      <td>
+       <a title="$helper.review_feedback($mp)">
+        $helper.display_feedback($mp)
+       </a>
+      </td>
+     </tr>
+     #end for
     </tbody>
    </table>
    <script type="text/javascript">
     ts_resortTable(document.getElementById("$project-sortscore"))
     ts_resortTable(document.getElementById("$project-sortscore"))
    </script>
-
-#end for
-</div>
-<script type="text/javascript">footer();</script>
-</body></html>
+   #end for
+  </div>
+  <script type="text/javascript">
+   footer();
+  </script>
+ </body>
+</html>
