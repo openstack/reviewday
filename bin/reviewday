@@ -33,7 +33,6 @@ PROJECTS = [
     'identity-api',
     'ironic',
     'keystone',
-    'marconi',
     'neutron',
     'nova',
     'os-apply-config',
@@ -46,12 +45,12 @@ PROJECTS = [
     'python-ironicclient',
     'python-keystoneclient',
     'python-neutronclient',
-    'python-marconiclient',
     'python-novaclient',
     'python-saharaclient',
     'python-swiftclient',
     'python-troveclient',
     'python-tuskarclient',
+    'python-zaqarclient',
     'sahara',
     'sahara-dashboard',
     'sahara-extra',
@@ -65,6 +64,7 @@ PROJECTS = [
     'trove-integration',
     'tuskar',
     'tuskar-ui',
+    'zaqar',
     ]
 
 for project in PROJECTS:
