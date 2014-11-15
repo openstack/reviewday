@@ -100,9 +100,11 @@
         12
        </span>
        <img src="${mp.cause.replace(' ', '').upper()}.png" title="$mp.cause"/>
-       <a href="$mp.url" title="$mp.subject">
-        $mp.subject[:60]
+       #filter WebSafe
+       <a href="$mp.url" title="${mp.subject, also='"'}">
+        ${mp.subject[:60], also='"'}
        </a>
+       #end filter
       </td>
       <!--
           <td>
