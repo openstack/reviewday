@@ -37,6 +37,7 @@ PROJECTS = [
     'nova',
     'os-apply-config',
     'os-collect-config',
+    'os-net-config',
     'os-refresh-config',
     'python-ceilometerclient',
     'python-cinderclient',
