@@ -16,7 +16,7 @@ HTML report generator which creates a prioritized review list w/ function test r
 
 1. Git clone the project.
 2. Install Python libraries for launchpadlib and cheetah.
-3. Setup your ssh credentials to work w/ Gerrit. See http://wiki.openstack.org/GerritWorkflow for details.
+3. Setup your ssh credentials to work w/ Gerrit. See http://docs.openstack.org/infra/manual/developers.html#development-workflow for details.
 
 ```bash
 	$ cat ~/.ssh/config 
