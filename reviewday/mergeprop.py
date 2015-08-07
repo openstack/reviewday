@@ -1,5 +1,22 @@
 class MergeProp(object):
 
+    cause_score = {
+        'Regression hotfix': 350,
+        'Critical bugfix': 340,
+        'Essential feature': 330,
+        'High feature': 230,
+        'Medium feature': 180,
+        'High bugfix': 130,
+        'Low feature': 100,
+        'Medium bugfix': 70,
+        'Low bugfix': 50,
+        'Undefined feature': 40,
+        'Wishlist bugfix': 35,
+        'Undecided bugfix': 30,
+        'Untargeted feature': 10,
+        'No link': 0,
+    }
+
     def _calc_score(self, lp, cur_timestamp):
         cause = 'No link'
         try:
@@ -19,28 +36,11 @@ class MergeProp(object):
             print 'WARNING: unable to find cause for %s' % self.topic
             cause = 'No link'
 
-        cause_score = {
-            'Regression hotfix': 350,
-            'Critical bugfix': 340,
-            'Essential feature': 330,
-            'High feature': 230,
-            'Medium feature': 180,
-            'High bugfix': 130,
-            'Low feature': 100,
-            'Medium bugfix': 70,
-            'Low bugfix': 50,
-            'Undefined feature': 40,
-            'Wishlist bugfix': 35,
-            'Undecided bugfix': 30,
-            'Untargeted feature': 10,
-            'No link': 0,
-        }
-
-        if cause not in cause_score:
+        if cause not in MergeProp.cause_score:
             print 'WARNING: unable to find score for ' \
                   '(%s, %s)' % (self.topic, cause)
             return ("No link", "Unknown cause: " + cause, 0)
-        score = cause_score[cause]
+        score = MergeProp.cause_score[cause]
         reason = [cause + " (+%d)" % (score)]
         # Add a score based on the time the patch has been waiting for approval
         days_old = int((cur_timestamp - self.revisionCreatedOn) / 86400)
@@ -88,3 +88,4 @@ class MergeProp(object):
         self.score = score
         self.reason = reason
         self.cause = cause
+        self.rank = MergeProp.cause_score[cause]

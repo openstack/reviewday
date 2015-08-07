@@ -60,7 +60,13 @@
      <tr>
       <th>
        <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
-        Type / Subject
+        Type
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
+        Subject
         <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
        </a>
       </th>
@@ -96,10 +102,15 @@
      #for $mp in $mergeprops
      <tr>
       <td>
+       <img src="${mp.cause.replace(' ', '').upper()}.png" title="$mp.cause"/>
+       <span class="sortkey">
+        $mp.rank
+       </span>
+      </td>
+      <td>
        <span class="sortkey">
         12
        </span>
-       <img src="${mp.cause.replace(' ', '').upper()}.png" title="$mp.cause"/>
        #filter WebSafe
        <a href="$mp.url" title="${mp.subject, also='"'}">
         ${mp.subject[:60], also='"'}
