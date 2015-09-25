@@ -8,12 +8,17 @@ from reviewday.util import create_report
 from reviewday.launchpad import LaunchPad
 from reviewday.mergeprop import MergeProp
 from optparse import OptionParser
+import os
+import yaml
 
 optparser = OptionParser()
 
 optparser.add_option('-o', '--out-dir', dest='out_dir',
                      help='set output directory [default = %default]',
                      default='out_report', type='string')
+optparser.add_option('-p', '--project-file', dest='project_file',
+                     help='A YAML or JSON file specifying the project list',
+                     type='string')
 
 (options, args) = optparser.parse_args()
 
@@ -68,7 +73,15 @@ PROJECTS = [
     'zaqar',
     ]
 
-for project in PROJECTS:
+proj_names = PROJECTS
+if options.project_file:
+    if os.path.exists(options.project_file):
+        with open(options.project_file) as cf:
+            proj_names = []
+            for proj in yaml.load(cf.read()).get("projects"):
+                proj_names.append(proj['name'])
+
+for project in proj_names:
     if project not in projects:
         projects[project] = []
     for review in gerrit_reviews(project):

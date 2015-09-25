@@ -35,7 +35,16 @@ An output directory called 'out\_report' is generated in the current directory.
 
 Alternately you can execute reviewday in a tox environment by using:
 
-	tox -erun
+       tox -erun
+
+## Customizing the projects
+
+If you wish to customize the output of reviewday you can use the -p (--project-file) option to provide a custom project names file. This file should be
+a valid YAML/JSON file formatted like this:
+
+	projects:
+	  - name: dib-utils
+	  - name: diskimage-builder
 
 ## License
 
