@@ -22,7 +22,7 @@ class MergeProp(object):
         try:
             if self.topic.find('bug/') == 0:
                 bug = lp.bug(self.topic[4:])
-                #FIXME: bug.importance doesn't seem to work but it should?
+                # FIXME: bug.importance doesn't seem to work but it should?
                 cause = '%s bugfix' % bug.bug_tasks[0].importance
             elif self.topic.find('bp/') == 0:
                 spec = lp.specification(self.project, self.topic[3:])

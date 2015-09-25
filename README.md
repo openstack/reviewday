@@ -31,7 +31,11 @@ HTML report generator which creates a prioritized review list w/ function test r
 
 	PYTHONPATH=$PWD ./bin/reviewday
 
-An output directory called 'out_report' is generated in the current directory.
+An output directory called 'out\_report' is generated in the current directory.
+
+Alternately you can execute reviewday in a tox environment by using:
+
+	tox -erun
 
 ## License
 

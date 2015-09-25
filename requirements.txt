@@ -1,0 +1,4 @@
+launchpadlib
+PyYAML
+Cheetah
+simplejson
