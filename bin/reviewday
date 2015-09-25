@@ -74,12 +74,16 @@ PROJECTS = [
     ]
 
 proj_names = PROJECTS
+lp_projects = {}
 if options.project_file:
     if os.path.exists(options.project_file):
         with open(options.project_file) as cf:
             proj_names = []
             for proj in yaml.load(cf.read()).get("projects"):
-                proj_names.append(proj['name'])
+                name = proj['name']
+                proj_names.append(name)
+                if 'launchpad_project' in proj:
+                    lp_projects[name] = proj['launchpad_project']
 
 for project in proj_names:
     if project not in projects:

@@ -45,6 +45,12 @@ a valid YAML/JSON file formatted like this:
 	projects:
 	  - name: dib-utils
 	  - name: diskimage-builder
+	  - name: tripleo-heat-templates
+	    launchpad_project: tripleo
+	  - name: tripleo-image-elements
+	    launchpad_project: tripleo
+	  - name: tripleo-incubator
+	    launchpad_project: tripleo
 
 ## License
 

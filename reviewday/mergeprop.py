@@ -25,11 +25,11 @@ class MergeProp(object):
                 # FIXME: bug.importance doesn't seem to work but it should?
                 cause = '%s bugfix' % bug.bug_tasks[0].importance
             elif self.topic.find('bp/') == 0:
-                spec = lp.specification(self.project, self.topic[3:])
+                spec = lp.specification(self.lp_proj_name, self.topic[3:])
                 if spec:
                     cause = '%s feature' % spec.priority
             else:
-                spec = lp.specification(self.project, self.topic)
+                spec = lp.specification(self.lp_proj_name, self.topic)
                 if spec:
                     cause = '%s feature' % spec.priority
         except:
@@ -52,11 +52,12 @@ class MergeProp(object):
             score = score + days_old_score
         return (cause, reason, score)
 
-    def __init__(self, lp, review, cur_timestamp):
+    def __init__(self, lp, review, cur_timestamp, launchpad_proj_name=None):
         self.owner_name = review['owner']['name']
         self.url = '%s/#change,%s' % tuple(review['url'].rsplit('/', 1))
         self.subject = review['subject']
         self.project = review['project'][10:]
+        self.lp_proj_name = launchpad_proj_name or review['project'][10:]
         if 'topic' in review:
             self.topic = review['topic']
         else:
