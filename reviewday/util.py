@@ -36,13 +36,31 @@ def _create_json(out_dir, name_space={}):
     os.rename(f.name, os.path.join(out_dir, 'reviewday.json'))
 
 
-def create_report(out_dir, name_space={}):
-    filename = os.path.join(os.path.dirname(__file__), 'report.html')
+def _create_data_html(out_dir, name_space={}):
+    # create the full report
+    filename = os.path.join(os.path.dirname(__file__), 'data_table.html')
     report_text = open(filename).read()
     name_space['helper'] = html_helper
     t = Template(report_text, searchList=[name_space])
 
     prep_out_dir(out_dir)
+
+    data_table_text = str(t)
+    with open(os.path.join(out_dir, 'data_table.html.tmp'), "w") as f:
+        f.write(data_table_text)
+    os.rename(f.name, os.path.join(out_dir, 'data_table.html'))
+    return data_table_text
+
+
+def create_report(out_dir, name_space={}):
+    # create html partial with just the unstyled data
+    data_table_text = _create_data_html(out_dir, name_space)
+
+    # create the full report
+    report_name_space = {'data': data_table_text, 'helper': html_helper}
+    filename = os.path.join(os.path.dirname(__file__), 'report.html')
+    report_text = open(filename).read()
+    t = Template(report_text, searchList=[report_name_space])
 
     with open(os.path.join(out_dir, 'index.html.tmp'), "w") as f:
         f.write(str(t))

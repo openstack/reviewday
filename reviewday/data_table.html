@@ -1,0 +1,116 @@
+  <div class="yui-d0">
+  <link href="combo.css" media="screen,print" rel="stylesheet" type="text/css"/>
+  <script src="sorting.js" type="text/javascript"/>
+   #for $project in $helper.sort($projects.keys()):
+    #set $mergeprops = $projects[$project]
+   <a name="$project">
+   </a>
+   <div class="flowed-block wide">
+    <h1>
+     $project branch reviews
+    </h1>
+    <ol class="breadcrumbs">
+     <li>
+      Page refreshed at $dts UTC
+     </li>
+     <li>
+      $len($mergeprops) active reviews
+     </li>
+    </ol>
+    <br/>
+   </div>
+   <table class="listing sortable" summary="$project reviews">
+    <thead>
+     <tr>
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
+        Type
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
+        Subject
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <!--
+          <th><a href="#" class="sortheader"
+            onclick="ts_resortTable(this); return false;">Patchsize<img
+            class="sortarrow" src="arrowBlank" height="6" width="9"></a></th>
+          <th><a href="#" class="sortheader"
+            onclick="ts_resortTable(this); return false;">Age<img
+            class="sortarrow" src="arrowBlank" height="6" width="9"></a></th>
+-->
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;">
+        Registrant
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <th>
+       <a class="sortheader" href="#" id="$project-sortscore" onclick="ts_resortTable(this); return false;" title="Score">
+        S
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+      <th>
+       <a class="sortheader" href="#" onclick="ts_resortTable(this); return false;" title="Feedback">
+        F
+        <img class="sortarrow" height="6" src="arrowBlank" width="9"/>
+       </a>
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     #for $mp in $mergeprops
+     <tr>
+      <td>
+       <img src="${mp.cause.replace(' ', '').upper()}.png" title="$mp.cause"/>
+       <span class="sortkey">
+        $mp.rank
+       </span>
+      </td>
+      <td>
+       <span class="sortkey">
+        12
+       </span>
+       #filter WebSafe
+       <a href="$mp.url" title="${mp.subject, also='"'}">
+        ${mp.subject[:60], also='"'}
+       </a>
+       #end filter
+      </td>
+      <!--
+          <td>
+            <span class="sortkey">3176</span>
+            3176 lines
+          </td>
+          <td>
+            <span class="sortkey">60</span>
+            60 days
+          </td>
+-->
+      <td>
+       $mp.owner_name
+      </td>
+      <td>
+       <a title="$helper.review_score($mp)">
+        $mp.score
+       </a>
+      </td>
+      <td>
+       <a title="$helper.review_feedback($mp)">
+        $helper.display_feedback($mp)
+       </a>
+      </td>
+     </tr>
+     #end for
+    </tbody>
+   </table>
+   <script type="text/javascript">
+    ts_resortTable(document.getElementById("$project-sortscore"))
+    ts_resortTable(document.getElementById("$project-sortscore"))
+   </script>
+   #end for
+  </div>
