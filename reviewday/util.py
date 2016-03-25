@@ -1,8 +1,10 @@
 import json
 import os
 import html_helper
+import subprocess
 from Cheetah.Template import Template
 from distutils.dir_util import copy_tree
+import gerrit_dash_creator
 
 
 def prep_out_dir(out_dir):
@@ -52,12 +54,29 @@ def _create_data_html(out_dir, name_space={}):
     return data_table_text
 
 
+def create_projects_dashboard(out_dir):
+    gerrit_dash_bin = os.path.join(os.path.dirname(
+        gerrit_dash_creator.__file__), '../gerrit-dash-creator')
+    template_dir = os.path.join(os.path.dirname(
+        gerrit_dash_creator.__file__), '../templates')
+    dashboard_file = '%s/milestone.dash' % out_dir
+    os.system('bin/neutron -o %s' % dashboard_file)
+    p = subprocess.Popen([gerrit_dash_bin,
+                         dashboard_file,
+                         '--template-directory', '%s' % template_dir],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    neutron_dash, err = p.communicate()
+    return {'neutron_dash': neutron_dash}
+
+
 def create_report(out_dir, name_space={}):
     # create html partial with just the unstyled data
     data_table_text = _create_data_html(out_dir, name_space)
 
     # create the full report
     report_name_space = {'data': data_table_text, 'helper': html_helper}
+    report_name_space.update(create_projects_dashboard(out_dir))
     filename = os.path.join(os.path.dirname(__file__), 'report.html')
     report_text = open(filename).read()
     t = Template(report_text, searchList=[report_name_space])
