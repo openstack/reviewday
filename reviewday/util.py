@@ -4,7 +4,6 @@ import html_helper
 import subprocess
 from Cheetah.Template import Template
 from distutils.dir_util import copy_tree
-import gerrit_dash_creator
 
 
 def prep_out_dir(out_dir):
@@ -55,15 +54,10 @@ def _create_data_html(out_dir, name_space={}):
 
 
 def create_projects_dashboard(out_dir):
-    gerrit_dash_bin = os.path.join(os.path.dirname(
-        gerrit_dash_creator.__file__), '../gerrit-dash-creator')
-    template_dir = os.path.join(os.path.dirname(
-        gerrit_dash_creator.__file__), '../templates')
     dashboard_file = '%s/milestone.dash' % out_dir
     os.system('bin/neutron -o %s' % dashboard_file)
-    p = subprocess.Popen([gerrit_dash_bin,
-                         dashboard_file,
-                         '--template-directory', '%s' % template_dir],
+    p = subprocess.Popen(['gerrit-dash-creator',
+                         dashboard_file],
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     neutron_dash, err = p.communicate()
