@@ -147,6 +147,7 @@ with open(file_name, 'w') as f:
     f.write(title)
     f.write("description = Review Inbox\n")
     f.write("foreach = (project:openstack/neutron OR "
+            "project:openstack/neutron-lib OR "
             "project:openstack/python-neutronclient OR "
             "project:openstack/neutron-specs OR "
             "project:openstack/neutron-fwaas OR "
