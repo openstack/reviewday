@@ -115,6 +115,12 @@ def write_queries_for_project(f, project, milestone):
     section_name = "Blueprints %s" % project.name
     write_section(f, section_name, query)
 
+def write_gate_queries_for_project(file_name, project):
+    all_gate_bugs = {'tags': ['gate-failure']}
+    query = _search_task(project, **all_gate_bugs)
+    section_name = "All Gate failure fixes %s" % project.name
+    write_section(f, section_name, query)
+
 
 def get_stadium_projects():
     data = urllib2.urlopen("http://git.openstack.org/cgit/openstack/"
@@ -167,5 +173,6 @@ with open(file_name, 'w') as f:
     f.write("\n")
 
     print("Querying Launchpad, this might take a while...")
+    write_gate_queries_for_project(f, neutron)
     write_queries_for_project(f, neutron, milestone)
     write_queries_for_project(f, neutron_client, milestone)
