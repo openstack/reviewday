@@ -4,8 +4,10 @@ import json
 
 def reviews(project, status="open", branch="master"):
     arr = []
+    if project.find('/') < 0:
+        project = 'openstack/%s' % project
     cmd = 'ssh review gerrit' \
-          ' query "status: %s project: openstack/%s branch: %s"' \
+          ' query "status: %s project: %s branch: %s"' \
           ' --current-patch-set --format JSON' \
           % (status, project, branch)
     p = subprocess.Popen([cmd], shell=True, stdin=subprocess.PIPE,
