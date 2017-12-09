@@ -51,6 +51,9 @@ a valid YAML/JSON file formatted like this:
 	    launchpad_project: tripleo
 	  - name: tripleo-incubator
 	    launchpad_project: tripleo
+          #Add a custom namespace like this. Defaults to 'openstack/'
+	  - name: openstack-infra/tripleo-ci
+	    launchpad_project: tripleo
 
 ## License
 
