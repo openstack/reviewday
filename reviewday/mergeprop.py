@@ -54,7 +54,7 @@ class MergeProp(object):
 
     def __init__(self, lp, review, cur_timestamp, launchpad_proj_name=None):
         self.owner_name = review['owner']['name']
-        self.url = '%s/#change,%s' % tuple(review['url'].rsplit('/', 1))
+        self.url = '%s/#/c/%s' % tuple(review['url'].rsplit('/', 1))
         self.subject = review['subject']
         self.project = review['project'][10:]
         self.lp_proj_name = launchpad_proj_name or review['project'][10:]
